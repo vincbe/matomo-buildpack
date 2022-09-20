@@ -2,7 +2,8 @@
 
 set -eu
 
-MATOMO_VERSION=$(cat ./bin/version)
+DEFAULT_MATOMO_VERSION="$(cat ./bin/version)"
+MATOMO_VERSION="${MATOMO_VERSION:-$DEFAULT_MATOMO_VERSION}"
 MATOMO_DOWNLOADS="$1/downloads"
 MATOMO_ZIP="$MATOMO_DOWNLOADS/matomo.zip"
 MATOMO_URL="https://builds.matomo.org/matomo-$MATOMO_VERSION.zip"

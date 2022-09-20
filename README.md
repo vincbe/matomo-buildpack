@@ -37,7 +37,9 @@ This buildpack does the following, see `bin/compile`:
 
 > The first two plugins are custom ones, initially developed by the Scalingo Team 💪.
 
-The version of the Matomo is defined in the `bin/version` file.
+The default version of the Matomo is defined in the `bin/version` file.
+
+To override the matomo version: set env variable MATOMO_VERSION
 
 This buildpack follows the [Cloud Native Buildpacks Specification](https://github.com/buildpacks/spec). So it should be compatible with [Scalingo](https://doc.scalingo.com/platform/deployment/buildpacks/custom), [Dokku](http://dokku.viewdocs.io/dokku~v0.5.0/deployment/buildpacks/) or [Heroku](https://devcenter.heroku.com/articles/buildpacks).
 
