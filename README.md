@@ -39,7 +39,7 @@ This buildpack does the following, see `bin/compile`:
 
 The default version of the Matomo is defined in the `bin/version` file.
 
-To override the matomo version: set env variable MATOMO_VERSION
+To override the matomo version: set env variable `MATOMO_VERSION`
 
 This buildpack follows the [Cloud Native Buildpacks Specification](https://github.com/buildpacks/spec). So it should be compatible with [Scalingo](https://doc.scalingo.com/platform/deployment/buildpacks/custom), [Dokku](http://dokku.viewdocs.io/dokku~v0.5.0/deployment/buildpacks/) or [Heroku](https://devcenter.heroku.com/articles/buildpacks).
 
@@ -56,11 +56,11 @@ In your Cloud application, define it as a multi-buildpacks application with mato
 For example, for Scalingo, create a `.buildpacks` with:
 
 ```shell script
-https://github.com/1024pix/matomo-buildpack#v3.14.1
+https://github.com/betagouv/matomo-buildpack#v3.14.1
 https://github.com/Scalingo/php-buildpack
 ```
 
-You can find a production-ready application [here](https://github.com/1024pix/matomo-scalingo-deploy).
+You can find a production-ready application [here](https://github.com/betagouv/matomo-scalingo-deploy).
 
 ## Upgrading
 
