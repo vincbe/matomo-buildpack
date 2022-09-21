@@ -2,6 +2,7 @@
 
 Buildpack for running a Matomo instance on a Cloud Platform (Scalingo, Clever Cloud, Dokku, Heroku, etc.).
 
+Original credits: https://github.com/1024pix/matomo-buildpack
 ## Matomo
 
 [Matomo](https://matomo.org) is a free and open source web analytics application, designed to be an open and compliant with GDPR alternative to Google Analytics.
@@ -39,7 +40,7 @@ This buildpack does the following, see `bin/compile`:
 
 The default version of the Matomo is defined in the `bin/version` file.
 
-To override the matomo version: set env variable MATOMO_VERSION
+To override the matomo version: set env variable `MATOMO_VERSION`
 
 This buildpack follows the [Cloud Native Buildpacks Specification](https://github.com/buildpacks/spec). So it should be compatible with [Scalingo](https://doc.scalingo.com/platform/deployment/buildpacks/custom), [Dokku](http://dokku.viewdocs.io/dokku~v0.5.0/deployment/buildpacks/) or [Heroku](https://devcenter.heroku.com/articles/buildpacks).
 
@@ -47,7 +48,7 @@ This buildpack follows the [Cloud Native Buildpacks Specification](https://githu
 
 Each tag of this repository corresponds to a Matomo official release.
 
-For example, tag `v3.14.1` corresponds to [Matomo#3.14.1](https://builds.matomo.org/matomo-3.14.1.zip).
+For example, tag `v4.2.1` corresponds to [Matomo#4.2.1](https://builds.matomo.org/matomo-4.2.1.zip).
 
 ## Usage
 
@@ -56,11 +57,11 @@ In your Cloud application, define it as a multi-buildpacks application with mato
 For example, for Scalingo, create a `.buildpacks` with:
 
 ```shell script
-https://github.com/1024pix/matomo-buildpack#v3.14.1
+https://github.com/betagouv/matomo-buildpack#v4.2.1
 https://github.com/Scalingo/php-buildpack
 ```
 
-You can find a production-ready application [here](https://github.com/1024pix/matomo-scalingo-deploy).
+You can find a production-ready application [here](https://github.com/betagouv/matomo-scalingo-deploy).
 
 ## Upgrading
 
@@ -80,9 +81,9 @@ If you need to re-publish a version for some reasons, simply make your changes, 
 
 ```shell script
 # some changes and git operations
-git tag -d v3.14.1 && \
-  git push --delete origin v3.14.1 && \
-  git tag -a "v3.14.1" -m "Release v3.14.1" && \
+git tag -d v4.2.1 && \
+  git push --delete origin v4.2.1 && \
+  git tag -a "v4.2.1" -m "Release v4.2.1" && \
   git push --tag
 ```
 
