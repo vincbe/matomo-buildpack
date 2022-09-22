@@ -2,11 +2,22 @@
 
 set -eu
 
+if [ -n "$BUILDPACK_DEBUG" ]; then
+  set -x
+fi
+
+if:IsSet() {
+  [[ ${!1-x} == x ]] && return 1 || return 0
+}
+
+
 DEFAULT_MATOMO_VERSION="$(cat ./bin/version)"
 MATOMO_VERSION="${MATOMO_VERSION:-$DEFAULT_MATOMO_VERSION}"
 MATOMO_DOWNLOADS="$1/downloads"
 MATOMO_ZIP="$MATOMO_DOWNLOADS/matomo.zip"
 MATOMO_URL="https://builds.matomo.org/matomo-$MATOMO_VERSION.zip"
+export MATOMO_GEO_DBIP
+if:IsSet MATOMO_GEO_DBIP || MATOMO_GEO_DBIP=""
 
 mkdir -p "$MATOMO_DOWNLOADS"
 
@@ -25,4 +36,17 @@ echo "done"
 
 echo -n "-----> Copying buildpack extra plugins... "
 mv ./plugins/* "$1/plugins"
+
+if [[ "$MATOMO_GEO_DBIP" == "true" ]]; then
+    echo -n "-----> Downloading geo DBIP ... "
+    CURRENT_DATE="$(date +%Y-%m)"
+    MATOMO_GEO_IP_URL="https://download.db-ip.com/free/dbip-city-lite-${CURRENT_DATE}.mmdb.gz"
+    MATOMO_GEO_IP_FILENAME="$(basename $MATOMO_GEO_IP_URL)"
+    curl -s --retry 3 -O -L "$MATOMO_GEO_IP_URL"
+    mv $MATOMO_GEO_IP_FILENAME "$1/misc/"
+    ( cd "$1/misc/"
+      gunzip -cd $MATOMO_GEO_IP_FILENAME > DBIP-City.mmdb
+      rm -rf $MATOMO_GEO_IP_FILENAME
+    )
+fi
 echo "done"
