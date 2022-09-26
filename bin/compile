@@ -2,22 +2,25 @@
 
 set -eu
 
-if [ -n "$BUILDPACK_DEBUG" ]; then
-  set -x
-fi
-
 if:IsSet() {
   [[ ${!1-x} == x ]] && return 1 || return 0
 }
 
+export BUILDPACK_DEBUG
+if:IsSet BUILDPACK_DEBUG || BUILDPACK_DEBUG=""
+
+if [ -n "$BUILDPACK_DEBUG" ]; then
+  set -x
+fi
+
+export MATOMO_GEO_DBIP
+if:IsSet MATOMO_GEO_DBIP || MATOMO_GEO_DBIP=""
 
 DEFAULT_MATOMO_VERSION="$(cat ./bin/version)"
 MATOMO_VERSION="${MATOMO_VERSION:-$DEFAULT_MATOMO_VERSION}"
 MATOMO_DOWNLOADS="$1/downloads"
 MATOMO_ZIP="$MATOMO_DOWNLOADS/matomo.zip"
 MATOMO_URL="https://builds.matomo.org/matomo-$MATOMO_VERSION.zip"
-export MATOMO_GEO_DBIP
-if:IsSet MATOMO_GEO_DBIP || MATOMO_GEO_DBIP=""
 
 mkdir -p "$MATOMO_DOWNLOADS"
 
